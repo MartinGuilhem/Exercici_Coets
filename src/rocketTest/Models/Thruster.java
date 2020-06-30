@@ -1,9 +1,9 @@
 package rocketTest.Models;
 
-public class Thruster {
+public class Thruster implements Runnable {
 	
 	private static int CONT=1;
-	private int id;
+	private int ThrusterID;
 	private int maxPower;
 	private int currentPower;
 	private int targetPower;
@@ -11,7 +11,7 @@ public class Thruster {
 		
 	public Thruster(int maxPower) {
 		
-		this.id= CONT;
+		this.ThrusterID= CONT;
 		CONT++;
 		this.maxPower = maxPower;
 		this.currentPower = 0;
@@ -53,8 +53,40 @@ public class Thruster {
 
 	@Override
 	public String toString() {
-		return "Thruster [ID:"+id+", maxPower=" + maxPower + ", currentPower=" + currentPower + ", targetPower=" + targetPower
+		return "Thruster [ID:"+ThrusterID+", maxPower=" + maxPower + ", currentPower=" + currentPower + ", targetPower=" + targetPower
 				+ "]";
+	}
+
+
+
+	@Override
+	public void run() {
+		
+		try {
+			if(currentPower<targetPower) {
+				do {
+					currentPower++;
+					System.out.println("Thruster "+ThrusterID+" || Current Power: "+currentPower+ " || Target power "+targetPower);
+					Thread.sleep(300);
+				}while(currentPower!=targetPower);
+				System.out.println("\n The Thruster: "+ThrusterID+" Reached the Target Power: ("+targetPower+")");
+			}
+			else if(currentPower>targetPower) {
+				do {
+					currentPower--;
+					System.out.println("Thruster "+ThrusterID+" || Current Power: "+currentPower+ " || Target power "+targetPower);
+					Thread.sleep(300);
+				}while(currentPower!=targetPower);
+				System.out.println("\n The Thruster: "+ThrusterID+" Reached the Target Power: ("+targetPower+")");
+			}
+			else {
+				System.out.println("The Truster is already at the required power.");
+			}
+			Thread.sleep(1000);
+		}catch(InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	

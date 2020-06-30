@@ -23,8 +23,14 @@ public class main {
 		System.out.println(rocket1);
 		System.out.println(rocket2);
 		
+		System.out.println("==================");
+		System.out.println("La fiesta empieza");
+		System.out.println("==================");
 		
-
+		rocket1.PowerToTarget(35);
+		
+		
+	
 	}
 
 }

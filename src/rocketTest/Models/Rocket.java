@@ -34,6 +34,15 @@ public class Rocket {
 	public void setThrusterList(List<Thruster> thrusterList) {
 		this.thrusterList = thrusterList;
 	}
+	
+	public void PowerToTarget(int targetPower) {
+		for(Thruster thruster: thrusterList)
+		{
+			thruster.setTargetPower(targetPower);
+			Thread t = new Thread(thruster);
+			t.start();
+		}
+	}
 
 
 	@Override
